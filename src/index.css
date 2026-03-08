@@ -195,18 +195,116 @@ html, body, #root {
 .cmd-sidebar        { display: none; }
 .cmd-topbar-mobile  { display: block; }
 
+/* Onboarding two-column shell — mobile: transparent passthrough */
+.onboarding-shell   { display: contents; }
+.onboarding-panel   { display: none; }
+.onboarding-content { display: contents; }
+
 @media (min-width: 900px) {
   .app-shell {
-    background: #DDDDD9;
-    align-items: flex-start;
+    background: #e8e8e4;
+    align-items: center;
+    justify-content: center;
     min-height: 100vh;
+    padding: 40px 24px;
   }
 
-  /* Onboarding screens: centered phone preview */
-  .screen:not(.screen-wide) {
-    min-height: 100vh;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.07), 0 24px 80px rgba(0,0,0,0.16);
-    margin: 0 auto;
+  /* ── Onboarding two-column layout ── */
+  .onboarding-shell {
+    display: flex;
+    width: 100%;
+    max-width: 980px;
+    min-height: 620px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.06), 0 32px 80px rgba(0,0,0,0.18);
+    contents: unset;
+  }
+
+  .onboarding-panel {
+    display: flex;
+    flex-direction: column;
+    width: 360px;
+    min-width: 360px;
+    flex-shrink: 0;
+    background: #0f2137;
+    padding: 40px 36px;
+    color: #ffffff;
+  }
+
+  .onboarding-panel-logo {
+    height: 24px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    margin-bottom: 52px;
+  }
+
+  .onboarding-panel-body {
+    flex: 1;
+  }
+
+  .onboarding-panel-headline {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+    margin-bottom: 14px;
+    color: #ffffff;
+  }
+
+  .onboarding-panel-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+
+  .onboarding-panel-perks {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .onboarding-panel-perk {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+
+  .onboarding-panel-perk-icon {
+    font-size: 18px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .onboarding-panel-footer {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 32px;
+  }
+
+  .onboarding-content {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    contents: unset;
+  }
+
+  /* Screen fills the right column */
+  .onboarding-content .screen {
+    max-width: none;
+    min-height: unset;
+    flex: 1;
+    border-radius: 0;
   }
 
   /* Command: full-width desktop shell */
