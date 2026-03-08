@@ -1,0 +1,245 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #f4f4f4;
+}
+
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  background: #f4f4f4;
+}
+
+.screen {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100dvh;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Progress bar */
+.progress-bar-track {
+  height: 3px;
+  background: #EEF0F3;
+  width: 100%;
+  flex-shrink: 0;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: #049fdd;
+  transition: width 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Fields */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6B7280;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  height: 52px;
+  padding: 0 14px;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 12px;
+  font-size: 16px;
+  color: #212322;
+  background: #FFFFFF;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #049fdd;
+}
+
+.field input::placeholder {
+  color: #C0C4CC;
+}
+
+.field-hint {
+  font-size: 12px;
+  color: #9CA3AF;
+  margin-top: 2px;
+}
+
+/* Buttons */
+.btn-primary {
+  width: 100%;
+  height: 52px;
+  border-radius: 12px;
+  border: none;
+  background: #049fdd;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-primary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-ghost {
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  color: #6B7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Chip selects */
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1.5px solid #E5E7EB;
+  background: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.chip.active {
+  border-color: #049fdd;
+  background: #E6F7FD;
+  color: #049fdd;
+}
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-out {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-28px); }
+}
+
+@keyframes check-draw {
+  from { stroke-dashoffset: 30; }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes circle-pop {
+  0%   { transform: scale(0.6); opacity: 0; }
+  70%  { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+.page-enter { animation: slide-in 0.3s cubic-bezier(0.32, 0.72, 0, 1) both; }
+.page-exit  { animation: slide-out 0.25s cubic-bezier(0.32, 0.72, 0, 1) both; }
+
+/* ── Desktop layout ───────────────────────────────────────────────────────── */
+.cmd-sidebar        { display: none; }
+.cmd-topbar-mobile  { display: block; }
+
+@media (min-width: 900px) {
+  .app-shell {
+    background: #DDDDD9;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+
+  /* Onboarding screens: centered phone preview */
+  .screen:not(.screen-wide) {
+    min-height: 100vh;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.07), 0 24px 80px rgba(0,0,0,0.16);
+    margin: 0 auto;
+  }
+
+  /* Command: full-width desktop shell */
+  .screen-wide {
+    max-width: 100%;
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: row;
+  }
+
+  /* Show sidebar, hide mobile tab bar */
+  .cmd-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    min-width: 220px;
+    background: #FFFFFF;
+    border-right: 1px solid #d9d9d6;
+    padding: 28px 14px 24px;
+    gap: 6px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .cmd-topbar-mobile { display: none !important; }
+
+  /* Wider content with a comfortable max-width */
+  .cmd-body {
+    max-width: 780px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
